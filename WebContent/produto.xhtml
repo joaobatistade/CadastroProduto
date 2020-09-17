@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Produto</title>
+	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
+</h:head>
+<h:body>
+	<h1 align="center">### Cadastro de Produto ###</h1>
+   	<h:form>
+	   	<div id="corpo" align="center">
+	   		<fieldset style="width: 400px;"> 
+				<h:messages style="color:green; margin:8px;"/>
+				<h:panelGrid columns="2">
+				
+					<h:outputLabel value="id"/>
+					<h:inputText value="#{produtoController.produto.id}"/>
+				
+					<h:outputLabel value="Nome"/>
+					<h:inputText value="#{produtoController.produto.nome}"/>
+				
+					<h:outputLabel value="Preço"/>
+					<h:inputText value="#{produtoController.produto.preco}"/>
+				
+					<h:outputLabel value="Descrição"/>
+					<h:inputText value="#{produtoController.produto.descricao}"/>
+					
+					<h:outputLabel value="Quantidade"/>
+					<h:inputText value="#{produtoController.produto.qtd}"/>
+					
+				</h:panelGrid>
+			</fieldset>
+		</div>
+		<div id="menu" align="center">
+			<h:commandButton value="Incluir"
+				actionListener="#{produtoController.incluir()}"/>
+					
+			<h:commandButton value="Alterar"
+				actionListener="#{produtoController.alterar()}"/>
+				
+			<h:commandButton value="Excluir"
+				actionListener="#{produtoController.excluir()}"/>
+				
+			<h:commandButton value="Limpar"
+				actionListener="#{produtoController.limpar()}"/>
+		</div>
+		
+		<div id="table" align="center">
+			<fieldset style="width: 400px;">
+				<h:dataTable value="#{produtoController.listaProduto}" var="obj">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						<h:outputLabel value="#{obj.id}"/>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:commandLink value="#{obj.nome}"
+							actionListener="#{produtoController.editar(obj)}"/>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Preço</f:facet>
+						<h:outputLabel value="#{obj.preco}"/>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Descrição</f:facet>
+						<h:outputLabel value="#{obj.descricao}"/>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Quantidade</f:facet>
+						<h:outputLabel value="#{obj.qtd}"/>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Ação</f:facet>
+						<h:commandLink value="Apagar" actionListener="#{produtoController.excluir(obj)}"/>
+					</h:column>
+					
+				</h:dataTable>
+			</fieldset>
+		</div>
+		
+	</h:form>
+</h:body>
+</html>
