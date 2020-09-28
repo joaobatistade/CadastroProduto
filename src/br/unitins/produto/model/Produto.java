@@ -7,47 +7,58 @@ public class Produto implements Cloneable{
 	private Integer id;
 	private String nome;
 	private String preco;
-	private String descricao;
+	private TipoProduto descricao;
 	private String qtd;
-	private LocalDate dataCadastrada;
+	private LocalDate dataCadastrado;
 	
 	public Integer getId() {
 		return id;
 	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public String getPreco() {
 		return preco;
 	}
+	
 	public void setPreco(String preco) {
 		this.preco = preco;
 	}
-	public String getDescricao() {
+	
+	public TipoProduto getDescricao() {
 		return descricao;
 	}
-	public void setDescricao(String descricao) {
+	
+	public void setDescricao(TipoProduto descricao) {
 		this.descricao = descricao;
 	}
+	
 	public String getQtd() {
 		return qtd;
 	}
+	
 	public void setQtd(String qtd) {
 		this.qtd = qtd;
 	}
-	public LocalDate getDataCadastrada() {
-		return dataCadastrada;
-	}
-	public void setDataCadastrada(LocalDate dataCadastrada) {
-		this.dataCadastrada = dataCadastrada;
-	}
 	
+	public LocalDate getDataCadastrado() {
+		return dataCadastrado;
+	}
+
+	public void setDataCadastrado(LocalDate dataCadastrado) {
+		this.dataCadastrado = dataCadastrado;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -14,76 +14,99 @@
 				<h:messages style="color:green; margin:8px;"/>
 				<h:panelGrid columns="2">
 				
-					<h:outputLabel value="id"/>
-					<h:inputText value="#{produtoController.produto.id}"/>
+					<h:outputLabel value="Nome:"/>
+					<h:inputText value="#{produtoController.produto.nome}"
+					required="true" requiredMessage="O nome deve ser informado!"/>
 				
-					<h:outputLabel value="Nome"/>
-					<h:inputText value="#{produtoController.produto.nome}"/>
-				
-					<h:outputLabel value="Preço"/>
+					<h:outputLabel value="Preço:"/>
 					<h:inputText value="#{produtoController.produto.preco}"/>
 				
-					<h:outputLabel value="Descrição"/>
-					<h:inputText value="#{produtoController.produto.descricao}"/>
+					<h:outputLabel value="Descrição:"/>
+					<h:selectOneMenu value="#{produtoController.produto.descricao}">
+						<f:selectItem itemLabel="Selecione..."/>
+						<f:selectItems value="#{produtoController.vetorProduto}"
+										var="obj"
+										itemLabel="#{obj.label}"/>
+					</h:selectOneMenu>
 					
-					<h:outputLabel value="Quantidade"/>
+					<h:outputLabel value="Data de Cadastro:"/>
+					<h:inputText value="#{produtoController.produto.dataCadastrado}">
+						<f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+					</h:inputText>
+					
+					<h:outputLabel value="Quantidade:"/>
 					<h:inputText value="#{produtoController.produto.qtd}"/>
 					
 				</h:panelGrid>
 			</fieldset>
-		</div>
-		<div id="menu" align="center">
-			<h:commandButton value="Incluir"
-				actionListener="#{produtoController.incluir()}"/>
-					
-			<h:commandButton value="Alterar"
-				actionListener="#{produtoController.alterar()}"/>
-				
-			<h:commandButton value="Excluir"
-				actionListener="#{produtoController.excluir()}"/>
-				
-			<h:commandButton value="Limpar"
-				actionListener="#{produtoController.limpar()}"/>
-		</div>
+			</div>
 		
-		<div id="table" align="center">
-			<fieldset style="width: 400px;">
-				<h:dataTable value="#{produtoController.listaProduto}" var="obj">
-					<h:column>
-						<f:facet name="header">Id</f:facet>
-						<h:outputLabel value="#{obj.id}"/>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Nome</f:facet>
-						<h:commandLink value="#{obj.nome}"
-							actionListener="#{produtoController.editar(obj)}"/>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Preço</f:facet>
-						<h:outputLabel value="#{obj.preco}"/>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Descrição</f:facet>
-						<h:outputLabel value="#{obj.descricao}"/>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Quantidade</f:facet>
-						<h:outputLabel value="#{obj.qtd}"/>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Ação</f:facet>
-						<h:commandLink value="Apagar" actionListener="#{produtoController.excluir(obj)}"/>
-					</h:column>
-					
-				</h:dataTable>
-			</fieldset>
-		</div>
-		
+			<div id="menu" align="center">
+				<h:commandButton value="Incluir"
+					actionListener="#{produtoController.incluir()}"
+					disabled="#{produtoController.produto.id != null}"/>
+						
+				<h:commandButton value="Alterar"
+					actionListener="#{produtoController.alterar()}"
+					disabled="#{produtoController.produto.id == null}"/>
+			</div>
 	</h:form>
+			<h:form>
+				<div id="menu" align="center">		
+					<h:commandButton value="Excluir"
+						actionListener="#{produtoController.excluir()}"
+						disabled="#{produtoController.produto.id == null}"/>
+						
+					<h:commandButton value="Limpar"
+						actionListener="#{produtoController.limpar()}"/>
+				</div>
+			</h:form>
+		
+		<h:form>
+			<div id="table" align="center">
+				<fieldset style="width: 400px;">
+					<h:dataTable value="#{produtoController.listaProduto}" var="obj">
+						<h:column>
+							<f:facet name="header">Id</f:facet>
+							<h:outputLabel value="#{obj.id}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:commandLink value="#{obj.nome}"
+								actionListener="#{produtoController.editar(obj)}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Preço</f:facet>
+							<h:outputLabel value="#{obj.preco}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Descrição</f:facet>
+							<h:outputLabel value="#{obj.descricao.label}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Data de Cadastro:</f:facet>
+							<h:outputLabel value="#{obj.dataCadastrado}">
+								<f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+							</h:outputLabel>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Quantidade</f:facet>
+							<h:outputLabel value="#{obj.qtd}"/>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Ação</f:facet>
+							<h:commandLink value="Apagar" actionListener="#{produtoController.excluir(obj)}"/>
+						</h:column>
+						
+					</h:dataTable>
+				</fieldset>
+			</div>
+		</h:form>
 </h:body>
 </html>

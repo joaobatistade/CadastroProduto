@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import com.sun.faces.util.Util;
 import br.unitins.produto.model.Produto;
+import br.unitins.produto.model.TipoProduto;
 
 @Named
 @ViewScoped
@@ -19,8 +20,10 @@ public class ProdutoController implements Serializable{
 	private static final long serialVersionUID = -2516738097724998633L;
 	private Produto produto;
 	private List<Produto> listaProduto;
+	private int id = 0;
 
 	public void incluir() {
+		getProduto().setId(++id);	//Auto incremento do id do produto
 		int index = getListaProduto().indexOf(getProduto());
 		if(index != -1) {
 			addMessage("Não é possivel fazer uma inclusão. O id do Produto ja existe.");
@@ -41,19 +44,22 @@ public class ProdutoController implements Serializable{
 		limpar();
 	}
 	
-	public void excluir() {
+	public void excluir() {	//Excluir no botão de "Excluir"
 		excluir(getProduto());
 	}
 	
 	public void excluir(Produto pro) {
-		getListaProduto().remove(pro);
-		addMessage("Exclusão realizada co sucesso.");
-		limpar();
+		getListaProduto().remove(pro);	//Remove o produto
+		addMessage("Exclusão realizada co sucesso.");	//Mensagem si removeu com sucesso
+		limpar();	//Chama o método de limpar após a remoção.
 	}
 	
-	public void limpar() {
-		System.out.println("Entro limpa");
+	public void limpar() {	//Limpa o produto
 		produto = null;
+	}
+	
+	public TipoProduto[] getVetorProduto(){	//Pega todos os item do enum
+		return TipoProduto.values();
 	}
 	
 	public void editar(Produto pro) {
